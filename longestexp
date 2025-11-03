@@ -1,0 +1,53 @@
+#include<iostream>
+#include<string>
+#include<sstream>
+#include<algorithm>
+using namespace std;
+int main(){
+//string input
+string str;
+cout<<"enter a string\n";
+getline(cin,str);
+
+//1)to find word with longest length
+stringstream ss(str);
+string word,longest="";
+while(ss>>word){
+    if(word.length()>longest.length()){
+        longest=word;
+    }
+}
+cout<<"longest word is :"<<longest<<endl;
+
+//2)to find freq of a character
+char ch;
+cout<<"\nenter a charater to count its frequency\n";
+cin>>ch;
+int count=0;
+for(char c : str){
+    if(c==ch)
+        count++;
+}
+cout<<"char "<<ch<<" appears "<<count<<"times"<<endl;
+
+//paliindrome check
+string temp=str;
+string rev=temp;
+reverse(rev.begin(),rev.end());
+if(rev==temp)
+  cout<<"the string is palindrome\n";
+  else
+  cout<<"the string is not palindrome\n";
+  
+  //4)substring search
+string sub;
+cout<<"\n enter a ssubstring to search\n";
+cin>>sub;
+int index=str.find(sub);
+if(index!=-1)
+  cout<<"\nsubstring found at index  :\n"<<index<<endl;
+  else
+  cout<<"\nsubstring not foundn\n"<<endl;
+  
+return 0;
+}
