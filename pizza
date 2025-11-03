@@ -1,0 +1,66 @@
+#include<iostream>
+using namespace std;
+
+#define MAX 5
+
+int main(){
+    int queue[MAX];
+    int front=-1,rear=-1;
+    int choice,order=1;
+    
+    while(true){
+        cout<<"\n1.placeorder\n2.serve Order\n3. Display Orders\n4. Exit\n";
+        cout<<"enter your choice: ";
+        cin>>choice;
+ //place order       
+        if(choice==1){
+            if((rear+1)%MAX==front){    //checks if full
+                cout<<"cannot plce order , queue is full\n";
+            }
+            else{
+                if(front==-1)front=0;   //first order
+                rear=(rear+1)%MAX;      //move rear forward
+                queue[rear]=order;      //store order number
+                 cout << "Order " << order << " placed successfully!\n";
+                order++;                //next order number
+            }
+        }
+  //serve order
+    else if(choice==2){
+        if(front==-1){
+            cout<<"no orders to serve";
+        }
+        else{
+            cout<<"order "<<queue[front]<<" served\n";
+            if(front==rear) front=rear=-1;    //queue emmpty now
+            else front=(front+1)%MAX;    //move front forward
+        }
+    }
+//display orders    
+else if(choice==3){
+    if(front==-1){
+        cout<<"no pending orders\n";
+    }
+    else{
+        cout<<"pending orders: ";
+         int i = front;
+                while (true) {
+                    cout << queue[i] << " ";
+                    if (i == rear) break;
+                    i = (i + 1) % MAX;
+                }
+                cout << endl;
+        }
+    }
+    else if (choice == 4) {
+            cout << "Thank you! Visit again!\n";
+            break;
+        }
+
+        else {
+            cout << "Invalid choice!\n";
+        }
+    }
+    return 0;
+}
+    pizza parlour
