@@ -1,0 +1,45 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main(){
+    int n,roll[50],key;
+    cout<<"enter number of students";
+    cin>>n;
+    cout<<"enter roll numbers\n";
+    for(int i=0;i<n;i++)
+    cin>>roll[i];
+    cout<<"enter roll no to search\n";
+    cin>>key;
+    
+//linear search
+bool found=false;
+for(int i=0;i<n;i++){
+    if(roll[i]==key){
+        cout<<"student with roll number "<<key<<" have attended";
+        found=true;
+        break;
+    }
+}
+    if(!found)
+    cout<<"student with roll no "<<key<<" not attended";
+
+
+//binary serch
+sort(roll,roll+n);
+int low=0,high=n-1,mid=(low+high)/2;
+found=false;
+while(low<=high){
+    if(roll[mid]==key){
+        cout<<"student with roll number "<<key<<" have attended";
+        found=true;
+        break;
+    }
+    else if(roll[mid]<key)
+    low=mid+1;
+    else
+    high=mid-1;;
+}
+if(!found)
+cout<<"student with roll no "<<key<<" not attended";
+return 0;
+}
