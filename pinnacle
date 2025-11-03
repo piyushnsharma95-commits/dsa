@@ -1,0 +1,117 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Node {
+    string name;
+    int prn;
+    Node* next;
+};
+
+class PinnacleClub {
+    Node* head;
+public:
+    PinnacleClub() { head = NULL; }
+
+    // Add President
+    void addPresident(string name, int prn) {
+        Node* temp = new Node{name, prn, NULL};
+        temp->next = head;
+        head = temp;
+    }
+
+    // Add Secretary
+    void addSecretary(string name, int prn) {
+        Node* temp = new Node{name, prn, NULL};
+        if (!head) head = temp;
+        else {
+            Node* p = head;
+            while (p->next) p = p->next;
+            p->next = temp;
+        }
+    }
+
+    // Add Member in between President & Secretary
+    void addMember(string name, int prn) {
+        Node* temp = new Node{name, prn, NULL};
+        if (!head) { head = temp; return; }
+        Node* p = head;
+        while (p->next && p->next->next) p = p->next;
+        temp->next = p->next;
+        p->next = temp;
+    }
+
+    // Delete President
+    void deletePresident() {
+        if (!head) return;
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
+
+    // Delete Secretary
+    void deleteSecretary() {
+        if (!head) return;
+        Node* p = head;
+        if (!p->next) { delete p; head = NULL; return; }
+        while (p->next->next) p = p->next;
+        delete p->next;
+        p->next = NULL;
+    }
+
+    // Display all members
+    void display() {
+        if (!head) { cout << "No members.\n"; return; }
+        Node* p = head;
+        cout << "\nClub Members:\n";
+        while (p) {
+            cout << p->prn << " - " << p->name << endl;
+            p = p->next;
+        }
+    }
+
+    // Count members
+    void countMembers() {
+        int count = 0;
+        Node* p = head;
+        while (p) { count++; p = p->next; }
+        cout << "\nTotal Members: " << count << endl;
+    }
+
+    // Concatenate two lists
+    void concatenate(PinnacleClub& other) {
+        if (!head) { head = other.head; return; }
+        Node* p = head;
+        while (p->next) p = p->next;
+        p->next = other.head;
+    }
+};
+
+int main() {
+    PinnacleClub A, B;
+
+    // Division A
+    A.addPresident("Alice", 101);
+    A.addMember("Bob", 102);
+    A.addSecretary("Charlie", 103);
+
+    cout << "Division A:";
+    A.display();
+    A.countMembers();
+
+    // Division B
+    B.addPresident("David", 201);
+    B.addMember("Eve", 202);
+    B.addSecretary("Frank", 203);
+
+    cout << "\nDivision B:";
+    B.display();
+
+    // Concatenate both
+    A.concatenate(B);
+    cout << "\nAfter Concatenation (A + B):";
+    A.display();
+    A.countMembers();
+
+    return 0;
+}
