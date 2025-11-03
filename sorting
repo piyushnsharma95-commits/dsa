@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+void selectionSort(float a[], int n) {
+    for (int i = 0; i < n - 1; i++)
+        for (int j = i + 1; j < n; j++)
+            if (a[j] < a[i])
+                swap(a[i], a[j]);
+    cout << "\nPercentages after Selection Sort:\n";
+    for (int i = 0; i < n; i++)
+        cout << a[i] << " ";
+}
+
+void bubbleSort(float a[], int n) {
+    for (int i = 0; i < n - 1; i++)
+        for (int j = 0; j < n - i - 1; j++)
+            if (a[j] > a[j + 1])
+                swap(a[j], a[j + 1]);
+    cout << "\nPercentages after Bubble Sort:\n";
+    for (int i = 0; i < n; i++)
+        cout << a[i] << " ";
+}
+
+int main() {
+    int n, choice;
+    float per[50];
+
+    cout << "Enter number of students: ";
+    cin >> n;
+
+    cout << "Enter their percentages:\n";
+    for (int i = 0; i < n; i++)
+        cin >> per[i];
+
+    cout << "\nChoose Sorting Method:\n";
+    cout << "1. Selection Sort\n2. Bubble Sort\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    if (choice == 1)
+        selectionSort(per, n);
+    else if (choice == 2)
+        bubbleSort(per, n);
+    else
+        cout << "Invalid choice!";
+
+    return 0;
+}
