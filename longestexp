@@ -48,6 +48,31 @@ if(index!=-1)
   cout<<"\nsubstring found at index  :\n"<<index<<endl;
   else
   cout<<"\nsubstring not foundn\n"<<endl;
+
+ // e) Count occurrences of each word (without map)
+    cout << "\n(e) Word occurrences:\n";
+    string words[50];
+    int count[50] = {0}, n = 0;
+
+    stringstream ss2(str);
+    while (ss2 >> word) {
+        bool found = false;
+        for (int i = 0; i < n; i++) {
+            if (words[i] == word) {
+                count[i]++;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            words[n] = word;
+            count[n] = 1;
+            n++;
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+        cout << words[i] << " : " << count[i] << endl;
   
 return 0;
 }
